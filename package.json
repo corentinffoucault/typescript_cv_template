@@ -15,8 +15,5 @@
     "build": "npx tsc",
     "start": "node dist/index.js"
   },
-  "devDependencies": {
-    "@tsconfig/node-lts": "latest"
-  },
   "homepage": "https://github.com/corentinffoucault/typescript_cv_template#readme"
 }
