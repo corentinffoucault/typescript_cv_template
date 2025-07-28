@@ -1,6 +1,7 @@
 {    
   "extends": "@tsconfig/node-lts/tsconfig.json",
   "compilerOptions": {
+    "noEmit": false,
     "outDir": "./dist",
     "rootDirs": [
       "src"

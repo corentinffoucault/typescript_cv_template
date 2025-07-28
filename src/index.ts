@@ -1,4 +1,4 @@
-import Resume from "./resume"
+import Resume from "./resume.js"
 
 function main() {
     console.log(new Resume().print())
