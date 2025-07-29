@@ -1,7 +1,7 @@
-import Resume from "./resume.js"
+import ResumeGenerator from "./ResumeGenerator.js"
 
 function main() {
-    console.log(new Resume().print())
+    console.log(new ResumeGenerator().print())
 }
 
 void main()

@@ -5,7 +5,8 @@
   },
   "compilerOptions": {
     "target": "es2023", 
-    "module": "es2022",
+    "module": "node16",
+    "moduleResolution": "node16",
     "outDir": "./dist",
     "esModuleInterop": true,                            
     "forceConsistentCasingInFileNames": true,            

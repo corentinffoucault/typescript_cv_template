@@ -1,4 +1,4 @@
-export default class Resume {
+export default class ResumeGenerator {
     public print() {
         return "hello world";
     }
