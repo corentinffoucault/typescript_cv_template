@@ -1,6 +1,6 @@
 import Duration from './duration.js'
 import Link from '../utils/link.js'
-import { Iso8601, Labels, Team, Work, Highlight } from '../type/type.js'
+import type { Iso8601, Labels, Team, Work, Highlight } from '../type/type.js'
 
 type NestedWork = {
   description?: string;

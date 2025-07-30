@@ -1,5 +1,5 @@
  
-import { Labels, Languages } from '../type/type.js'
+import type { Labels, Languages } from '../type/type.js'
 
 export default function Languages(languages: Languages[], labels: Labels) {
   return (

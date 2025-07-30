@@ -1,5 +1,5 @@
  
-import { ResumeSchema } from '../type/type.js'
+import type { ResumeSchema } from '../type/type.js'
 import Education from './education.js'
 import Header from './header.js'
 import Interests from './interests.js'

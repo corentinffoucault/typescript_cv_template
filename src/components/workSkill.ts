@@ -1,6 +1,6 @@
  
-import { Labels, Work } from '../type/type.js';
-import markdown from '../utils/markdown.mjs'
+import type { Labels, Work } from '../type/type.js';
+import markdown from '../utils/markdown.js'
 
 export default function Work(work: Work[] = [], labels: Labels) {
   const highlightsByCat: Map<string, Set<string>> = work.reduce((acc, { highlights }) => {   

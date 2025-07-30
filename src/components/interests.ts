@@ -1,5 +1,5 @@
  
-import { Interest, Labels } from '../type/type.js'
+import type { Interest, Labels } from '../type/type.js'
 
 export default function Interests(interests: Interest[], labels: Labels) {
   return (

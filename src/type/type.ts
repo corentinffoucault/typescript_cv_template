@@ -1,6 +1,6 @@
 export type Iso8601 = string;
 
-export interface Labels {
+export type Labels = {
     works: string;
     planguages: string;
     team: string;
@@ -13,7 +13,7 @@ export interface Labels {
     interests: string;
 }
 
-export interface Basics {
+export type Basics = {
     name?: string;
     label?: string;
     image?: string;
@@ -36,21 +36,21 @@ export interface Basics {
     }[];
 }
 
-export interface Team {
+export type Team = {
     back: number;
     front: number;
     fullStack: number;
     description: string;
 }
 
-export interface Highlight {
+export type Highlight = {
     subject: string;
     cat?: string;
     alternative?: string;
     detail: string[];
 }
 
-export interface Work {
+export type Work = {
     name?: string;
     location?: string;
     description?: string;
@@ -67,7 +67,7 @@ export interface Work {
     method?: string[];
 }
 
-export interface volunteers {
+export type volunteers = {
     organization?: string;
     position?: string;
     url?: string;
@@ -77,7 +77,7 @@ export interface volunteers {
     highlights?: string[];
 }
 
-export interface Education {
+export type Education = {
     institution?: string;
     url?: string;
     area?: string;
@@ -88,27 +88,27 @@ export interface Education {
     courses?: string[];
 }
 
-export interface Meta {
+export type Meta = {
     canonical?: string;
     version?: string;
     lastModified?: string;
 }
 
-export interface Award {
+export type Award ={
     title?: string;
     date?: Iso8601;
     awarder?: string;
     summary?: string;
 }
 
-export interface Certificate {
+export type Certificate = {
     name?: string;
     date?: Iso8601;
     url?: string;
     issuer?: string;
 }
 
-export interface Publication {
+export type Publication = {
     name?: string;
     publisher?: string;
     releaseDate?: Iso8601;
@@ -116,27 +116,27 @@ export interface Publication {
     summary?: string;
 }
 
-export interface Skill {
+export type Skill = {
     name?: string;
     level?: string;
     keywords?: string[];
 }
 
-export interface Languages {
+export type Languages = {
     language?: string;
     fluency?: string;
 }
 
-export interface Interest {
+export type Interest = {
     name?: string;
 }
 
-export interface Reference {
+export type Reference = {
     name?: string;
     reference?: string;
 }
 
-export interface Project {
+export type Project = {
     name?: string;
     description?: string;
     highlights?: string[];
@@ -149,7 +149,7 @@ export interface Project {
     type?: string;
 }
 
-export interface ResumeSchema {
+export type ResumeSchema = {
   $schema?: string;
   labels: Labels
   basics: Basics;

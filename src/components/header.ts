@@ -1,7 +1,7 @@
-import markdown from '../utils/markdown.mjs'
+import markdown from '../utils/markdown.js'
 import Icon from './icon.js'
 import Link from '../utils/link.js'
-import { Basics } from '../type/type.js'
+import type { Basics } from '../type/type.js'
 
 function formatCountry(countryCode: string): string {
   return Intl.DisplayNames ? new Intl.DisplayNames(['en'], { type: 'region' }).of(countryCode)! : countryCode

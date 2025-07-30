@@ -1,5 +1,5 @@
-import { Education, Labels } from '../type/type.js'
-import markdown from '../utils/markdown.mjs'
+import type { Education, Labels } from '../type/type.js'
+import markdown from '../utils/markdown.js'
 import Link from '../utils/link.js'
 
 export default function Education(education: Education[], lables: Labels) {

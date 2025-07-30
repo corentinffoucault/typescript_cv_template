@@ -1,4 +1,4 @@
-import { Skill } from "../type/type.js";
+import type { Skill } from "../type/type.js";
 
 export default function Skills2(skills: Skill[]) {
   return (
