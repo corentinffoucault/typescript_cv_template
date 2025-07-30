@@ -1,5 +1,5 @@
  
-import markdown from '../utils/markdown.js'
+import markdown from '../utils/markdown.mjs'
 import Duration from './duration.js'
 import Link from '../utils/link.js'
 import { Iso8601, Labels, Team, Work, Highlight } from '../type/type.js'
@@ -34,8 +34,7 @@ export default function Work(work: Work[], labels: Labels): string {
     }
     return acc
   }, [])
-  return (
-    work.length > 0 ? '' :
+  return work.length > 0 ? '' :
     `
       <section id="work">
         <h3>${labels.works}</h3>
@@ -71,7 +70,7 @@ export default function Work(work: Work[], labels: Labels): string {
                                 ${highlights.map(highlight => `
                                 <li>${markdown(highlight.subject)}</li>
                                 ${highlight.detail && `<ul>${highlight.detail.map(detail => `<li>${markdown(detail)}</li>`)}</ul>`}
-                                `)}
+                                `).join('')}
                               </ul>
                             `}
                           </div>
@@ -92,14 +91,13 @@ export default function Work(work: Work[], labels: Labels): string {
                           </div>`}
                         </div>
                       </div>
-                    `,
-                  )}
+                    `
+                  ).join('')}
                 </div>
               </article>
-            `,
-          )}
+            `
+          ).join('')}
         </div>
       </section>
     `
-  )
 }

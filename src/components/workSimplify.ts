@@ -71,12 +71,12 @@ export default function WorkSimplify(work: Work[] = [], labels: Labels) {
                           <div><span class="simplifyWorkPosition"><b>${position}</b></span>${startDate && `: ${Duration(startDate, endDate)}`}</div>
                         </span>
                       </div>
-                    `,
-                  )}
+                    `
+                  ).join('')}
                 </div>
               </article>
-            `,
-          )}
+            `
+          ).join('')}
         </div>
       </div>
     `

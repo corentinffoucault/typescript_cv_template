@@ -10,7 +10,7 @@ import Work from './work.js'
 import WorkSimplify from './workSimplify.js'
 import WorkSkill from './workSkill.js'
 
-export default function Resume(resume: ResumeSchema, css: string, js: string) {
+export default function Resume(resume: ResumeSchema, css: Buffer, js: Buffer) {
   return `<!doctype html>
     <html lang="en">
       <head>
@@ -19,10 +19,10 @@ export default function Resume(resume: ResumeSchema, css: string, js: string) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700&display=swap" />
         <style>
-          ${css}
+          ${css.toString()}
         </style>
         <script type="module">
-          ${js}
+          ${js.toString()}
         </script>
       </head>
         <div class="headers">

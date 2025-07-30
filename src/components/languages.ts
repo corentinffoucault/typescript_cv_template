@@ -13,7 +13,7 @@ export default function Languages(languages: Languages[], labels: Labels) {
             ({ fluency, language }) => ` <li>
                     <div class="subWorkInfo"><h6>${language}:  </h6>${fluency ? `<em> ${fluency}</em>` : ''}</div>
                 </li>`,
-          )}
+          ).join('')}
         </ul>
     </div>
     `

@@ -1,5 +1,5 @@
 import { Education, Labels } from '../type/type.js'
-import markdown from '../utils/markdown.js'
+import markdown from '../utils/markdown.mjs'
 import Link from '../utils/link.js'
 
 export default function Education(education: Education[], lables: Labels) {
@@ -30,7 +30,7 @@ export default function Education(education: Education[], lables: Labels) {
                 `}
               </article>
             `,
-          )}
+          ).join('')}
         </div>
       </section>
       </div>

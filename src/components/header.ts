@@ -1,4 +1,4 @@
-import markdown from '../utils/markdown.js'
+import markdown from '../utils/markdown.mjs'
 import Icon from './icon.js'
 import Link from '../utils/link.js'
 import { Basics } from '../type/type.js'
@@ -51,7 +51,7 @@ export default function Header(basics: Basics) {
                 ${network && Icon(network as feather.FeatherIconNames, 'user')} ${Link(url, username)}
                 ${network && `<span class="network">(${network})</span>`}
               </li>
-            `,
+            `
           )}
         </ul>
       </div>

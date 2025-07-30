@@ -1,5 +1,5 @@
 import { Basics } from '../type/type.js'
-import markdown from '../utils/markdown.js'
+import markdown from '../utils/markdown.mjs'
 
 export default function Meta(basics: Basics) {
   const { name, summary } = basics

@@ -1,6 +1,6 @@
  
 import { Labels, Work } from '../type/type.js';
-import markdown from '../utils/markdown.js'
+import markdown from '../utils/markdown.mjs'
 
 export default function Work(work: Work[] = [], labels: Labels) {
   const highlightsByCat: Map<string, Set<string>> = work.reduce((acc, { highlights }) => {   
@@ -26,10 +26,10 @@ export default function Work(work: Work[] = [], labels: Labels) {
             `<h3>${cat[0]}</h3>
             <ul>
               ${cat[1]?
-                Array.from(cat[1]).sort().map(highlight => `<li>${markdown(highlight)}</li>`):'aa'
+                Array.from(cat[1]).sort().map(highlight => `<li>${markdown(highlight)}</li>`).join(''):'aa'
               }
             </ul>`
-            )
+            ).join('')
           }
           </div>
       </div>

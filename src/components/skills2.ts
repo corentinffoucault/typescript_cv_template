@@ -18,8 +18,8 @@ export default function Skills2(skills: Skill[]) {
                    keyword => `<div class="main-skill skill left">${keyword}</div>`).join('')}
                 </div>
             </section>
-        `,
-      )}
+        `
+      ).join('')}
       </section>
       </div>
     `
