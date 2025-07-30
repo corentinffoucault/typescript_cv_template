@@ -1,38 +1,50 @@
- 
-import type { Labels, Work } from '../type/type.js';
-import markdown from '../utils/markdown.js'
 
-export default function Work(work: Work[] = [], labels: Labels) {
-  const highlightsByCat: Map<string, Set<string>> = work.reduce((acc, { highlights }) => {   
-    if(highlights) {
-      for (let item of highlights) {
-        if (item.cat) {
-          if (!acc.has(item.cat)) {
-            acc.set(item.cat, new Set());
-          }
-          acc.get(item.cat).add(item.alternative || item.subject)
+import type { Labels, Work } from '../type/type.js';
+import markdown from '../utils/markdown.js';
+
+export class WorkSkillGenerator {
+
+    public static generate(work: Work[] = [], labels: Labels): string {
+        if (work.length == 0) {
+            return '';
         }
-      }
+
+        const highlightsByCat: Map<string, Set<string>> = WorkSkillGenerator.groupHighlightByCategory(work);
+
+        return `
+            <div id="workSkill">
+                <div class="highlights">
+                    ${Array.from(highlightsByCat).map(WorkSkillGenerator.generateCategory).join('')}
+                </div>
+            </div>`;
     }
-    return acc;
-  }, new Map())
-  
-  return (
-    work.length > 0 &&
-    `
-      <div id="workSkill">
-          <div class="highlights">
-          ${Array.from(highlightsByCat).map((cat)=> 
-            `<h3>${cat[0]}</h3>
+
+    private static generateCategory([category, highlights]: [string, Set<string>]): string {
+        return `
+            <h3>${category}</h3>
             <ul>
-              ${cat[1]?
-                Array.from(cat[1]).sort().map(highlight => `<li>${markdown(highlight)}</li>`).join(''):'aa'
-              }
-            </ul>`
-            ).join('')
-          }
-          </div>
-      </div>
-    `
-  )
+                ${Array.from(highlights).sort().map(WorkSkillGenerator.generateHighlight).join('')}
+            </ul>`;
+    }
+
+    private static generateHighlight(highlight: string): string {
+        return `<li>${markdown(highlight)}</li>`;
+    }
+
+    private static groupHighlightByCategory(work: Work[]): Map<string, Set<string>> {
+        return work.reduce((acc, { highlights }) => {
+            if (!highlights || highlights.length == 0) {
+                return acc;
+            }
+            for (let item of highlights) {
+                if (item.cat) {
+                    if (!acc.has(item.cat)) {
+                        acc.set(item.cat, new Set());
+                    }
+                    acc.get(item.cat).add(item.alternative || item.subject);
+                }
+            }
+            return acc;
+        }, new Map());
+    }
 }

@@ -1,15 +1,15 @@
- 
-import markdown from '../utils/markdown.js'
-import Duration from './duration.js'
-import Link from '../utils/link.js'
-import type { Iso8601, Labels, Team, Work, Highlight } from '../type/type.js'
+
+import markdown from '../utils/markdown.js';
+import Duration from './duration.js';
+import Link from '../utils/link.js';
+import type { Iso8601, Labels, Team, Work, Highlight } from '../type/type.js';
 
 type NestedWork = {
-  description?: string;
-  name?: string;
-  url?: string;
-  items: Item[];
-}
+    description?: string;
+    name?: string;
+    url?: string;
+    items: Item[];
+};
 type Item = {
     location?: string;
     position?: string;
@@ -22,20 +22,20 @@ type Item = {
     env?: string[];
     tools?: string[];
     method?: string[];
-}
+};
 
-export default function Work(work: Work[], labels: Labels): string {
-  const nestedWork: NestedWork[] = work.reduce((acc: NestedWork[], { description, name, url, ...rest }) => {
-    const prev: NestedWork = acc[acc.length - 1]
-    if (prev && prev.name === name) {
-      prev.items.push(rest)
-    } else { 
-      acc.push({ description, name, url, items: [rest] })
-    }
-    return acc
-  }, [])
-  return work.length > 0 ? '' :
-    `
+export default function Work(work: Work[] = [], labels: Labels): string {
+    const nestedWork: NestedWork[] = work.reduce((acc: NestedWork[], { description, name, url, ...rest }) => {
+        const prev: NestedWork = acc[acc.length - 1];
+        if (prev && prev.name === name) {
+            prev.items.push(rest);
+        } else {
+            acc.push({ description, name, url, items: [rest] });
+        }
+        return acc;
+    }, []);
+    return work.length > 0 ? '' :
+        `
       <section id="work">
         <h3>${labels.works}</h3>
         <div class="stack">
@@ -48,12 +48,12 @@ export default function Work(work: Work[], labels: Labels): string {
                 </header>
                 <div class="timeline">
                   ${items.map(
-                    ({ highlights = [], planguages = [], tools = [], env = [], method = [], team, location, position, startDate, endDate, summary }) => `
+                ({ highlights = [], planguages = [], tools = [], env = [], method = [], team, location, position, startDate, endDate, summary }) => `
                       <div>
                         <div>
                           <h5>${position}</h5>
                           ${team && `<div class="workmeta">
-                            ${`<div>${labels.team} ${team.description}: ${team.back > 0 && `${team.back} back`}${ team.front > 0 && team.back > 0  && `, `}${team.front > 0 && `${team.front} front`}${team.front + team.back > 0 && team.fullStack > 0 && `, `}${ team.fullStack > 0 && `${team.fullStack} fullStack`}</div>`}
+                            ${`<div>${labels.team} ${team.description}: ${team.back > 0 && `${team.back} back`}${team.front > 0 && team.back > 0 && `, `}${team.front > 0 && `${team.front} front`}${team.front + team.back > 0 && team.fullStack > 0 && `, `}${team.fullStack > 0 && `${team.fullStack} fullStack`}</div>`}
                           </div>`}
                            
                           <div class="workmeta">
@@ -65,7 +65,7 @@ export default function Work(work: Work[], labels: Labels): string {
                         <div class="workInfo">
                           <div class="highlights">
                             ${highlights.length > 0 &&
-                            `
+                    `
                               <ul>
                                 ${highlights.map(highlight => `
                                 <li>${markdown(highlight.subject)}</li>
@@ -74,7 +74,7 @@ export default function Work(work: Work[], labels: Labels): string {
                               </ul>
                             `}
                           </div>
-                          ${planguages.length+tools.length+env.length+method.length > 0 && `<div class="detail">
+                          ${planguages.length + tools.length + env.length + method.length > 0 && `<div class="detail">
                               ${planguages.length > 0 && `<div class="keyWord minimal flex-container">
                                 <b>${labels.planguages}</b>: ${planguages?.join(', ')}
                               </div>`}
@@ -92,12 +92,12 @@ export default function Work(work: Work[], labels: Labels): string {
                         </div>
                       </div>
                     `
-                  ).join('')}
+            ).join('')}
                 </div>
               </article>
             `
-          ).join('')}
+        ).join('')}
         </div>
       </section>
-    `
+    `;
 }

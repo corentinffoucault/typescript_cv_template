@@ -1,55 +1,62 @@
- 
-import type { ResumeSchema } from '../type/type.js'
-import Education from './education.js'
-import Header from './header.js'
-import Interests from './interests.js'
-import Languages from './languages.js'
-import Meta from './meta.js'
-import Skills2 from './skills2.js'
-import Work from './work.js'
-import WorkSimplify from './workSimplify.js'
-import WorkSkill from './workSkill.js'
 
-export default function Resume(resume: ResumeSchema, css: Buffer, js: Buffer) {
-  return `<!doctype html>
-    <html lang="en">
-      <head>
-        <meta charset="utf-8" />
-        ${Meta(resume.basics)}
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700&display=swap" />
-        <style>
-          ${css.toString()}
-        </style>
-        <script type="module">
-          ${js.toString()}
-        </script>
-      </head>
-        <div class="headers">
-           ${Header(resume.basics)} 
-        </div>
-        <div class="body">
-        <aside class="left-column">
-          ${Education(resume.education, resume.labels)}
-          ${Languages(resume.languages, resume.labels)}
-          ${Skills2(resume.skills)} 
-          ${Interests(resume.interests, resume.labels)}
-        </aside>
-        <div class="vl"></div>
-        <div class="right-column">
-                  
-          ${WorkSkill(resume.work, resume.labels)} 
-          ${WorkSimplify(resume.work, resume.labels)} 
-        </div>
-        </div>
-      </body>
-    </html>`
+import type { ResumeSchema } from '../type/type.js';
+import { EducationGenerator } from './education.js';
+import { HeaderGenerator } from './header.js';
+import { InterestGenerator } from './interests.js';
+import { LanguagesGenerator } from './languages.js';
+import { MetaGenerator } from './meta.js';
+import { SkillGenerator } from './skills.js';
+import Work from './work.js';
+import { WorkSimplifyGenerator } from './workSimplify.js';
+import { WorkSkillGenerator } from './workSkill.js';
+
+export class ResumeGenerator {
+
+    public static generate(resume: ResumeSchema, css: Buffer, js: Buffer, simplifyVersion: boolean = false): string {
+        return `
+        <!doctype html>
+        <html lang="en">
+            <head>
+                <meta charset="utf-8" />
+                ${MetaGenerator.generate(resume.basics)}
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700&display=swap" />
+                <style>
+                    ${css.toString()}
+                </style>
+                <script type="module">
+                    ${js.toString()}
+                </script>
+            </head>
+            <body>
+                <div class="headers">
+                    ${HeaderGenerator.generate(resume.basics)} 
+                </div>
+                <div class="body">
+                <aside class="left-column">
+                    ${EducationGenerator.generate(resume.education, resume.labels)}
+                    ${LanguagesGenerator.generate(resume.languages, resume.labels)}
+                    ${SkillGenerator.generate(resume.skills)} 
+                    ${InterestGenerator.generate(resume.interests, resume.labels)}
+                </aside>
+                ${ResumeGenerator.generateWork(resume, simplifyVersion)}
+            </body>
+        </html>`;
+    }
+
+    private static generateWork(resume: ResumeSchema, simplifyVersion: boolean) {
+        if (simplifyVersion) {
+            return `
+                <div class="vl"></div>
+                    <div class="right-column">
+                        ${WorkSkillGenerator.generate(resume.work, resume.labels)} 
+                        ${WorkSimplifyGenerator.generate(resume.work, resume.labels)} 
+                    </div>
+                </div>`;
+        }
+        return `
+            <div class="right-column">        
+                ${Work(resume.work, resume.labels)} 
+            </div>`;
+    }
 }
-
-/**
- 
-        <div class="right-column">
-                  
-          ${Work(resume.work, resume.labels)} 
-        </div>
- */

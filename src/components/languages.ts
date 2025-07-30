@@ -1,21 +1,32 @@
- 
-import type { Labels, Languages } from '../type/type.js'
 
-export default function Languages(languages: Languages[], labels: Labels) {
-  return (
-    languages.length > 0 &&
-    `
+import type { Labels, Language } from '../type/type.js';
+
+export class LanguagesGenerator {
+
+    public static generate(languages: Language[], labels: Labels): string {
+        if (languages.length == 0) {
+            return '';
+        }
+        return `
         <div class="container languages-container">
-        <h3 class="bold">${labels.language}</h3>
+            <h3 class="bold">${labels.language}</h3>
+            <ul class="minimal">
+                ${languages.map(LanguagesGenerator.generateLanguage).join('')}
+            </ul>
+        </div>`;
+    }
 
-        <ul class="minimal">
-         ${languages.map(
-            ({ fluency, language }) => ` <li>
-                    <div class="subWorkInfo"><h6>${language}:  </h6>${fluency ? `<em> ${fluency}</em>` : ''}</div>
-                </li>`,
-          ).join('')}
-        </ul>
-    </div>
-    `
-  )
+    private static generateLanguage(language: Language): string {
+        return `
+            <li>
+                <div class="subWorkInfo"><h6>${language.language}:</h6>  ${LanguagesGenerator.generateFluency(language)}</div>
+            </li>`;
+    }
+
+    private static generateFluency(language: Language): string {
+        if (language.fluency) {
+            return `<em>${language.fluency}</em>`;
+        }
+        return '';
+    }
 }

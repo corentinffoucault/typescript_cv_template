@@ -11,7 +11,21 @@ export type Labels = {
     diploma: string;
     language: string;
     interests: string;
-}
+};
+
+export type Location = {
+    address?: string;
+    postalCode?: string;
+    city?: string;
+    countryCode?: string;
+    region?: string;
+};
+
+export type Profiles = {
+    network?: string;
+    username?: string;
+    url?: string;
+};
 
 export type Basics = {
     name?: string;
@@ -22,33 +36,23 @@ export type Basics = {
     url?: string;
     summary?: string;
     birth: string;
-    location?: {
-      address?: string;
-      postalCode?: string;
-      city?: string;
-      countryCode?: string;
-      region?: string;
-    }
-    profiles?: {
-      network?: string;
-      username?: string;
-      url?: string;
-    }[];
-}
+    location?: Location;
+    profiles?: Profiles[];
+};
 
 export type Team = {
     back: number;
     front: number;
     fullStack: number;
     description: string;
-}
+};
 
 export type Highlight = {
     subject: string;
     cat?: string;
     alternative?: string;
     detail: string[];
-}
+};
 
 export type Work = {
     name?: string;
@@ -65,7 +69,7 @@ export type Work = {
     env?: string[];
     tools?: string[];
     method?: string[];
-}
+};
 
 export type volunteers = {
     organization?: string;
@@ -75,7 +79,7 @@ export type volunteers = {
     endDate?: Iso8601;
     summary?: string;
     highlights?: string[];
-}
+};
 
 export type Education = {
     institution?: string;
@@ -86,27 +90,27 @@ export type Education = {
     endDate?: Iso8601;
     score?: string;
     courses?: string[];
-}
+};
 
 export type Meta = {
     canonical?: string;
     version?: string;
     lastModified?: string;
-}
+};
 
-export type Award ={
+export type Award = {
     title?: string;
     date?: Iso8601;
     awarder?: string;
     summary?: string;
-}
+};
 
 export type Certificate = {
     name?: string;
     date?: Iso8601;
     url?: string;
     issuer?: string;
-}
+};
 
 export type Publication = {
     name?: string;
@@ -114,27 +118,27 @@ export type Publication = {
     releaseDate?: Iso8601;
     url?: string;
     summary?: string;
-}
+};
 
 export type Skill = {
     name?: string;
     level?: string;
     keywords?: string[];
-}
+};
 
-export type Languages = {
+export type Language = {
     language?: string;
     fluency?: string;
-}
+};
 
 export type Interest = {
     name?: string;
-}
+};
 
 export type Reference = {
     name?: string;
     reference?: string;
-}
+};
 
 export type Project = {
     name?: string;
@@ -147,22 +151,22 @@ export type Project = {
     roles?: string[];
     entity?: string;
     type?: string;
-}
+};
 
 export type ResumeSchema = {
-  $schema?: string;
-  labels: Labels
-  basics: Basics;
-  work?: Work[];
-  volunteer: volunteers[];
-  education: Education[];
-  awards: Award[];
-  certificates: Certificate[];
-  publications: Publication[];
-  skills: Skill[];
-  languages: Languages[];
-  interests: Interest[];
-  references: Reference[];
-  projects: Project[];
-  meta: Meta;
-}
+    $schema?: string;
+    labels: Labels;
+    basics: Basics;
+    work?: Work[];
+    volunteer: volunteers[];
+    education: Education[];
+    awards: Award[];
+    certificates: Certificate[];
+    publications: Publication[];
+    skills: Skill[];
+    languages: Language[];
+    interests: Interest[];
+    references: Reference[];
+    projects: Project[];
+    meta: Meta;
+};

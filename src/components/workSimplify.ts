@@ -1,14 +1,15 @@
-import Duration from './duration.js'
-import Link from '../utils/link.js'
-import type { Iso8601, Labels, Team, Work, Highlight } from '../type/type.js'
+import Duration from './duration.js';
+import Link from '../utils/link.js';
+import type { Iso8601, Labels, Team, Work, Highlight } from '../type/type.js';
 
-type NestedWork = {
-  description?: string;
-  name?: string;
-  url?: string;
-  items: Item[];
-}
-type Item = {
+//TODO: rework the name
+type NestedJob = {
+    description?: string;
+    name?: string;
+    url?: string;
+    jobs: PartJob[];
+};
+type PartJob = {
     location?: string;
     position?: string;
     startDate?: Iso8601;
@@ -20,65 +21,82 @@ type Item = {
     env?: string[];
     tools?: string[];
     method?: string[];
-}
+};
 
-export default function WorkSimplify(work: Work[] = [], labels: Labels) {
-  const nestedWork = work.reduce((acc: NestedWork[], { description, name, url, ...rest }) => {
-    const prev = acc[acc.length - 1]
-    if (prev && prev.name === name) {
-      prev.items.push(rest)
-    } else {
-      acc.push({ description, name, url, items: [rest] })
-    }
-    return acc
-  }, [])
-  return (
-    work.length > 0 &&
-    `<div id="work">
+export class WorkSimplifyGenerator {
+
+    public static generate(works: Work[] = [], labels: Labels): string {
+        if (works.length == 0) {
+            return '';
+        }
+        const nestedWork = works.reduce((acc: NestedJob[], { description, name, url, ...rest }) => {
+            const prev = acc[acc.length - 1];
+            if (prev && prev.name === name) {
+                prev.jobs.push(rest);
+            } else {
+                acc.push({ description, name, url, jobs: [rest] });
+            }
+            return acc;
+        }, []);
+        return `
+        <div id="work">
         <h3>${labels.works}</h3>
         <div class="stackSimple">
-          ${nestedWork.map(
-            ({ description, name, url, items = [] }) => `
+          ${nestedWork.map(WorkSimplifyGenerator.generateWork).join('')}
+        </div>
+      </div>`;
+    }
+
+    private static generateWork(job: NestedJob): string {
+        const jobs = WorkSimplifyGenerator.buildTimeLine(job.jobs);
+        return `
               <article>
                 <header>
-                  <h4>${Link(url, name)}</h4>
-                  <div class="meta">${description && `<div>${description}</div>`}</div>
+                  <h4>${Link(job.url, job.name)}</h4>
+                  <div class="meta">${job.description && `<div>${job.description}</div>`}</div>
                 </header>
                 <div class="timeline">
-                  ${items.reduce(
-                    (acc: Item[], { position, startDate, endDate }) => {
-                      let hasMelt = false;
-                      for (let element of acc) {
-                        if (position===element.position) {
-                          if (endDate === element.startDate) {
-                            element.startDate = startDate;
-                            hasMelt = true;
-                          } else if (startDate === element.endDate) {
-                            element.endDate = endDate;
-                            hasMelt = true;
-                          }
-                          break;
-                        }
-                      } 
-                      if(!hasMelt) {
-                        acc.push({ position, startDate, endDate })
-                      }
-                      return acc;
-                    }, []).map(
-                    ({ position, startDate, endDate }) => `
-                      <div>
-                        <span>
-                          <div><span class="simplifyWorkPosition"><b>${position}</b></span>${startDate && `: ${Duration(startDate, endDate)}`}</div>
-                        </span>
-                      </div>
-                    `
-                  ).join('')}
+                  ${jobs.map(WorkSimplifyGenerator.generateJob).join('')}
                 </div>
               </article>
-            `
-          ).join('')}
-        </div>
-      </div>
-    `
-  )
+            `;
+    }
+
+    //TODO: rework this part
+    private static buildTimeLine(jobs: PartJob[]): PartJob[] {
+        return jobs.reduce((acc: PartJob[], subJob: PartJob) => {
+            let hasMelt = false;
+            for (let element of acc) {
+                if (subJob.position === element.position) {
+                    if (subJob.endDate === element.startDate) {
+                        element.startDate = subJob.startDate;
+                        hasMelt = true;
+                    } else if (subJob.startDate === element.endDate) {
+                        element.endDate = subJob.endDate;
+                        hasMelt = true;
+                    }
+                    break;
+                }
+            }
+            if (!hasMelt) {
+                acc.push({ position: subJob.position, startDate: subJob.startDate, endDate: subJob.endDate });
+            }
+            return acc;
+        }, []);
+    }
+
+    private static generateJob(job: PartJob): string {
+        return `
+            <div>
+                <span>
+                    <div>
+                        <span class="simplifyWorkPosition">
+                            <b>${job.position}</b>
+                        </span>
+                        ${job.startDate && `: ${Duration(job.startDate, job.endDate)}`}
+                    </div>
+                </span>
+            </div>`;
+    }
+
 }
