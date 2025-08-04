@@ -68,7 +68,7 @@ export class HeaderGenerator {
     private static generateLineWithIcon(name: feather.FeatherIconNames, text: string, css?: string): string {
         return `
             <li ${css && `style="${css}"`}>
-                ${Icon('phone')}
+                ${Icon(name)}
                 ${text}
             </li>`;
     }

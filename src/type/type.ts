@@ -51,7 +51,7 @@ export type Highlight = {
     subject: string;
     cat?: string;
     alternative?: string;
-    detail: string[];
+    details?: string[];
 };
 
 export type Work = {

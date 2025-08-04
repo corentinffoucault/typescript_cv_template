@@ -54,7 +54,7 @@
                 {
                     "subject": "Conception d’un moteur de recherche multilingue",
                     "cat": "Sujets",
-                    "detail": [
+                    "details": [
                         "Optimisation de l'indexation des documents dans un contexte multilingue",
                         "Mise en place d'une architecture de recherche multilingue plus performant",
                         "Ajout de suggestion intelligente à la recherche",
@@ -64,7 +64,7 @@
                 {
                     "subject": "Conception de gestion CRUD de graphes orientés non cyclique sur de grand volume avec retour sur erreur",
                     "cat": "Sujets",
-                    "detail": [
+                    "details": [
                         "Suppression définitive d'arborescence",
                         "Déplacement d'arborescence",
                         "Analyse des graphes acycliques orientés",
@@ -127,7 +127,7 @@
                 {
                     "subject": "Études sur les IA et usage dans le contexte des bibliothèques virtuelles",
                     "cat": "Études",
-                    "detail": [
+                    "details": [
                         "Labellisation d'image pour la recherche",
                         "Aide à la conversion des documents en groupe d'articles",
                         "Aide dans la compréhension des bugs",

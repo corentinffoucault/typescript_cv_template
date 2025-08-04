@@ -9,7 +9,7 @@ export class InterestGenerator {
         return `
             <div class="container interests-container">
                 <h3 class="bold">${labels.interests}</h3>
-                ${interests.map(InterestGenerator.generateInterest)}
+                ${interests.map(InterestGenerator.generateInterest).join('')}
             </div>`;
     }
 

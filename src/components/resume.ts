@@ -6,13 +6,14 @@ import { InterestGenerator } from './interests.js';
 import { LanguagesGenerator } from './languages.js';
 import { MetaGenerator } from './meta.js';
 import { SkillGenerator } from './skills.js';
-import Work from './work.js';
+import { WorkGenerator } from './work.js';
 import { WorkSimplifyGenerator } from './workSimplify.js';
 import { WorkSkillGenerator } from './workSkill.js';
 
 export class ResumeGenerator {
 
     public static generate(resume: ResumeSchema, css: Buffer, js: Buffer, simplifyVersion: boolean = false): string {
+        console.log(`simplifyVersion ${simplifyVersion}`);
         return `
         <!doctype html>
         <html lang="en">
@@ -45,6 +46,7 @@ export class ResumeGenerator {
     }
 
     private static generateWork(resume: ResumeSchema, simplifyVersion: boolean) {
+        console.log(`simplifyVersion ${simplifyVersion}`);
         if (simplifyVersion) {
             return `
                 <div class="vl"></div>
@@ -56,7 +58,7 @@ export class ResumeGenerator {
         }
         return `
             <div class="right-column">        
-                ${Work(resume.work, resume.labels)} 
+                ${WorkGenerator.generate(resume.labels, resume.work)} 
             </div>`;
     }
 }

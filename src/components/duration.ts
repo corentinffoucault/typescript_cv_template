@@ -1,6 +1,9 @@
 import DateTime from '../utils/date-time.js';
 
-export default function Duration(startDate: string, endDate?: string): string {
+export default function Duration(startDate?: string, endDate?: string): string {
+    if (!startDate) {
+        return '';
+    }
     if (endDate === startDate) {
         return getDate(endDate);
     }

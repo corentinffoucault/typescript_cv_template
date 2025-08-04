@@ -6,6 +6,6 @@ export default class ResumeConvertor {
     public async generateResume(resumeJson: ResumeSchema) {
         const css = await fs.readFile("resource/page.css");
         const js = await fs.readFile("resource/page.js");
-        return ResumeGenerator.generate(resumeJson, css, js);
+        return ResumeGenerator.generate(resumeJson, css, js, true);
     }
 }
