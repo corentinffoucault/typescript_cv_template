@@ -2,7 +2,7 @@
 import markdown from '../utils/markdown.js';
 import Duration from './duration.js';
 import Link from '../utils/link.js';
-import type { Iso8601, Labels, Team, Work, Highlight } from '../type/type.js';
+import type { Iso8601, Labels, Team, Work, Highlight } from '../../../json_cv_schema/src/type/type.js';
 
 type NestedWork = {
     description?: string;
