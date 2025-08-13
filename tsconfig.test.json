@@ -1,0 +1,22 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "rootDir": ".",
+        "outDir": "dist-tests",
+        "declaration": true,
+        "types": [
+            "mocha",
+            "chai",
+            "node"
+        ]
+    },
+    "include": [
+        "src/**/*",
+        "tests/**/*"
+    ],
+    "references": [
+        {
+            "path": "../json_cv_schema",
+        }
+    ]
+}

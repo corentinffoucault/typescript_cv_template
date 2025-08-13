@@ -13,6 +13,10 @@
     "type": "module",
     "scripts": {
         "build": "npx tsc --build",
+        "build-tests": "tsc -p tsconfig.test.json && shx cp -r ./resources ./dist-tests",
+        "pretest": "npm run build && npm run build-tests",
+        "test": "node --test dist-tests/**/*Spec.js",
+        "build2": "npx tsc --build tsconfig.json",
         "start": "node dist/index.js"
     },
     "dependencies": {
@@ -22,6 +26,12 @@
     },
     "homepage": "https://github.com/corentinffoucault/typescript_cv_template#readme",
     "devDependencies": {
-        "@types/feather-icons": "^4.29.4"
+        "@types/chai": "^4.3.5",
+        "@types/feather-icons": "^4.29.4",
+        "@types/mocha": "^10.0.10",
+        "@types/node": "^24.2.1",
+        "chai": "^5.2.1",
+        "mocha": "^11.7.1",
+        "shx": "^0.4.0"
     }
 }
