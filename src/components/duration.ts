@@ -1,15 +1,18 @@
-import DateTime from '../utils/date-time.js';
+import DateTime from '../utils/DateTime.js';
 
-export default function Duration(startDate?: string, endDate?: string): string {
-    if (!startDate) {
-        return '';
-    }
-    if (endDate === startDate) {
-        return getDate(endDate);
-    }
-    return `<time-duration>${getDate(startDate)} – ${endDate ? getDate(endDate) : 'Present'}</time-duration>`;
-}
+export default class Duration {
 
-function getDate(dateToConvert: string): string {
-    return dateToConvert.length === 4 ? dateToConvert : DateTime(dateToConvert);
+    public static print(startDate?: string, endDate?: string): string {
+        if (!startDate) {
+            return '';
+        }
+        if (endDate === startDate) {
+            return Duration.getDate(endDate);
+        }
+        return `<time-duration>${Duration.getDate(startDate)} – ${endDate ? Duration.getDate(endDate) : 'Present'}</time-duration>`;
+    }
+
+    private static getDate(dateToConvert: string): string {
+        return dateToConvert.length === 4 ? dateToConvert : DateTime.generate(dateToConvert);
+    }
 }

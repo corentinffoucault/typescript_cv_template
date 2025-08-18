@@ -1,7 +1,7 @@
 
-import markdown from '../utils/markdown.js';
-import Duration from './duration.js';
-import Link from '../utils/link.js';
+import Markdown from '../utils/MarkdownGenerator.js';
+import Duration from './Duration.js';
+import Link from '../utils/LinkGenerator.js';
 import type { Iso8601, Labels, Team, Work, Highlight } from '../../../json_cv_schema/src/type/type.js';
 
 type NestedWork = {
@@ -50,7 +50,7 @@ export class WorkGenerator {
     private static buildTimeLine(labels: Labels, job: NestedWork): string {
         return `<article>
                     <header>
-                    <h4>${Link(job.url, job.name)}</h4>
+                    <h4>${Link.generate(job.url, job.name)}</h4>
                     <div class="meta">${job.description && `<div>${job.description}</div>`}</div>
                     </header>
                     <div class="timeline">
@@ -66,7 +66,7 @@ export class WorkGenerator {
                         ${WorkGenerator.generateTeam(labels, item.team)}
                         ${WorkGenerator.generateWorkMeta(item)}
                     </div>
-                    ${markdown(item.summary)}
+                    ${Markdown.generate(item.summary)}
                     <div class="workInfo">
                         ${WorkGenerator.generateHighlights(item.highlights)}
                         ${WorkGenerator.generateSkill(labels, item)}
@@ -103,7 +103,7 @@ export class WorkGenerator {
     }
 
     private static generateHighlight(highlight: Highlight): string {
-        return `<li>${markdown(highlight.subject)}</li>
+        return `<li>${Markdown.generate(highlight.subject)}</li>
                 ${WorkGenerator.generateHighlightDetail(highlight)}`;
     }
 
@@ -112,14 +112,14 @@ export class WorkGenerator {
             return '';
         }
         return `<ul>
-                    ${details.map(detail => `<li>${markdown(detail)}</li>`).join('')}
+                    ${details.map(detail => `<li>${Markdown.generate(detail)}</li>`).join('')}
                 </ul>`;
     }
 
     private static generateWorkMeta(job: Item): string {
         return `<div class="workmeta">
                     <div>
-                        ${Duration(job.startDate, job.endDate)}
+                        ${Duration.print(job.startDate, job.endDate)}
                     </div>
                     ${job.location ? `<div>${job.location}</div>` : ''}
                 </div>`;

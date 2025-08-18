@@ -11,48 +11,37 @@ test('ResumeConvertor', async (t) => {
         const resumeConvertor = new ResumeConvertor();
         const a = await resumeConvertor.generateResume({
             labels: {
-                works: '',
-                planguages: '',
-                team: '',
-                tools: '',
-                environment: '',
-                methods: '',
-                worksSkill: '',
-                diploma: '',
-                language: '',
-                interests: ''
+                works: 'works',
+                planguages: 'languages',
+                team: 'team',
+                tools: 'tools',
+                environment: 'environment',
+                methods: 'methods',
+                worksSkill: 'worksSkill',
+                diploma: 'diploma',
+                language: 'language',
+                interests: 'interests'
             },
             basics: {
-                name: undefined,
-                label: undefined,
-                image: undefined,
-                email: undefined,
-                phone: undefined,
-                url: undefined,
-                summary: undefined,
-                birth: '',
-                location: undefined,
-                profiles: undefined
+                name: 'firstName lastName',
+                label: 'BackEnd Developer Engineer',
+                email: 'myemail@email.com',
+                phone: '001122334455',
+                location: {
+                    city: 'myCity',
+                    countryCode: 'FR'
+                }
             },
-            volunteer: [],
             education: [],
-            awards: [],
-            certificates: [],
-            publications: [],
             skills: [],
             languages: [],
-            interests: [],
-            references: [],
-            projects: [],
-            meta: {
-                canonical: undefined,
-                version: undefined,
-                lastModified: undefined
-            }
+            interests: []
         });
 
         const __filename = fileURLToPath(import.meta.url);
         const _srcPath = path.dirname(__filename);
+        await fs.writeFile(path.join(_srcPath, "../../testResources/resultEmpty.html"), a);
+
         const result = await fs.readFile(path.join(_srcPath, "../../testResources/resultEmpty.html"));
         assert.equal(a, result.toString());
     });

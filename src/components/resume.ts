@@ -1,7 +1,7 @@
 
 import type { ResumeSchema } from '../../../json_cv_schema/src/type/type.js';
-import { EducationGenerator } from './education.js';
-import { HeaderGenerator } from './header.js';
+import EducationGenerator from './Education.js';
+import HeaderGenerator from './Header.js';
 import { InterestGenerator } from './interests.js';
 import { LanguagesGenerator } from './languages.js';
 import { MetaGenerator } from './meta.js';

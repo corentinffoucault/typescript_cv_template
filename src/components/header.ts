@@ -1,9 +1,8 @@
-import markdown from '../utils/markdown.js';
-import Icon from '../utils/icon.js';
-import Link from '../utils/link.js';
+import Icon from '../utils/IconGenerator.js';
+import Link from '../utils/LinkGenerator.js';
 import type { Basics, Location, Profiles } from '../../../json_cv_schema/src/type/type.js';
 
-export class HeaderGenerator {
+export default class HeaderGenerator {
 
     private static formatCountry(countryCode: string): string {
         return Intl.DisplayNames ? new Intl.DisplayNames(['en'], { type: 'region' }).of(countryCode)! : countryCode;
@@ -16,37 +15,34 @@ export class HeaderGenerator {
     }
 
     public static generate(basics: Basics): string {
-        const { email, birth, label, location, name, phone, profiles = [], summary, url } = basics;
+        const { email, birth, label, location, name, phone, profiles = [] } = basics;
 
         return `
             <header class="masthead">
                 <div class="menu">
-                    <div>${name && `<h6>${name}</h6>`}</div>
-                    <div>${birth && `Age: ${HeaderGenerator.calculateAge(new Date(birth))}`}</div>
-                    ${summary && `<article>${markdown(summary)}</article>`}
+                    <div><h6>${name}</h6></div>
+                    <div>${birth ? `Age: ${HeaderGenerator.calculateAge(new Date(birth))}` : ''}</div>
                     <ul class="icon-list">
-                        ${location?.city && HeaderGenerator.generateCity(location)}
-                        ${email && HeaderGenerator.generateEMail(email)}
-                        ${phone && HeaderGenerator.generatePhone(phone)}
-                        ${url && HeaderGenerator.generateLink(url)}
+                        ${HeaderGenerator.generateCity(location)}
+                        ${HeaderGenerator.generateEMail(email)}
+                        ${HeaderGenerator.generatePhone(phone)}
                         ${profiles.map((profile) => HeaderGenerator.generateProfile(profile)).join('')}
                     </ul>
                 </div>
-                <div class="content">${label && `<h1>${label}</h1>`}</div>
+                <div class="content"><h1>${label}</h1></div>
             </header>`;
     }
 
     private static generateProfile({ network, url, username }: Profiles): string {
         return `
             <li>
-                ${network && Icon(network as feather.FeatherIconNames, 'user')} ${Link(url, username)}
+                ${network && Icon.generate(network as feather.FeatherIconNames, 'user')} ${Link.generate(url, username)}
                 ${network && `<span class="network">(${network})</span>`}
             </li>`;
     }
 
     private static generateCity(location: Location): string {
-        const countryCode = location.countryCode && `, ${HeaderGenerator.formatCountry(location.countryCode)}`;
-        const htmlCity = `${location.city}${countryCode}`;
+        const htmlCity = `${location.city}, ${HeaderGenerator.formatCountry(location.countryCode)}`;
         const css = 'font-size: 10px;';
         return HeaderGenerator.generateLineWithIcon('map-pin', htmlCity, css);
     }
@@ -57,7 +53,7 @@ export class HeaderGenerator {
     }
 
     private static generateLink(url: string): string {
-        return HeaderGenerator.generateLineWithIcon('link', Link(url));
+        return HeaderGenerator.generateLineWithIcon('link', Link.generate(url));
     }
 
     private static generateEMail(email: string): string {
@@ -67,8 +63,8 @@ export class HeaderGenerator {
 
     private static generateLineWithIcon(name: feather.FeatherIconNames, text: string, css?: string): string {
         return `
-            <li ${css && `style="${css}"`}>
-                ${Icon(name)}
+            <li${css ? ` style="${css}"` : ''}>
+                ${Icon.generate(name)}
                 ${text}
             </li>`;
     }

@@ -1,5 +1,5 @@
 import type { Basics } from '../../../json_cv_schema/src/type/type.js';
-import markdown from '../utils/markdown.js';
+import Markdown from '../utils/MarkdownGenerator.js';
 
 export class MetaGenerator {
     public static generate(basics: Basics): string {
@@ -7,6 +7,6 @@ export class MetaGenerator {
 
         return `
             ${name && `<title>${name}</title>`}
-            ${summary && `<meta name="description" content="${markdown(summary, true)}" />`}`;
+            ${summary && `<meta name="description" content="${Markdown.generate(summary, true)}" />`}`;
     }
 }

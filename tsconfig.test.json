@@ -3,7 +3,9 @@
     "compilerOptions": {
         "rootDir": ".",
         "outDir": "dist-tests",
-        "declaration": true,
+        "composite": false,
+        "declaration": false,
+        "declarationMap": false,
         "types": [
             "mocha",
             "chai",
@@ -14,6 +16,7 @@
         "src/**/*",
         "tests/**/*"
     ],
+    "exclude": [],
     "references": [
         {
             "path": "../json_cv_schema",
