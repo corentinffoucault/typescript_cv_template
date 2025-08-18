@@ -1,7 +1,7 @@
 import type { Basics } from '../../../json_cv_schema/src/type/type.js';
 import Markdown from '../utils/MarkdownGenerator.js';
 
-export class MetaGenerator {
+export default class MetaGenerator {
     public static generate(basics: Basics): string {
         const { name, summary } = basics;
 

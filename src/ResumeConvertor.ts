@@ -2,7 +2,7 @@ import { promises as fs } from 'fs';
 import * as path from 'path';
 import { fileURLToPath } from 'url';
 
-import { ResumeGenerator } from "./components/resume.js";
+import ResumeGenerator from "./generator/Resume.js";
 import { ResumeSchema } from "../../json_cv_schema/src/type/type.js";
 import { IResumeConvertor } from "../../json_cv_schema/src/type/IResumeConvertor.js";
 

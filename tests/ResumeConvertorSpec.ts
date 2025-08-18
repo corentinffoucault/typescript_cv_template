@@ -35,7 +35,8 @@ test('ResumeConvertor', async (t) => {
             education: [],
             skills: [],
             languages: [],
-            interests: []
+            interests: [],
+            work: []
         });
 
         const __filename = fileURLToPath(import.meta.url);

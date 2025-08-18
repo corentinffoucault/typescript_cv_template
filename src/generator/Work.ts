@@ -24,9 +24,9 @@ type Item = {
     method?: string[];
 };
 
-export class WorkGenerator {
+export default class WorkGenerator {
 
-    public static generate(labels: Labels, work: Work[] = []): string {
+    public static generate(work: Work[], labels: Labels): string {
         if (work.length == 0) {
             return '';
         }

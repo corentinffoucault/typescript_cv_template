@@ -1,7 +1,7 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 
-import Duration from '../../src/components/Duration.js';
+import Duration from '../../src/generator/Duration.js';
 
 describe('Duration', () => {
     it('generate empty duration', () => {

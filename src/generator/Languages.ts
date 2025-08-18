@@ -1,7 +1,7 @@
 
 import type { Labels, Language } from '../../../json_cv_schema/src/type/type.js';
 
-export class LanguagesGenerator {
+export default class LanguagesGenerator {
 
     public static generate(languages: Language[], labels: Labels): string {
         if (languages.length == 0) {

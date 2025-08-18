@@ -1,0 +1,43 @@
+import { describe, it } from 'node:test';
+import assert from 'node:assert/strict';
+
+import MetaGenerator from '../../src/generator/Meta.js';
+
+describe('Meta', () => {
+    it('generate minimal meta', () => {
+        const meta = MetaGenerator.generate({
+            name: 'firstName lastName',
+            label: 'BackEnd Developer Engineer',
+            email: 'myemail@email.com',
+            phone: '001122334455',
+            location: {
+                city: 'myCity',
+                countryCode: 'FR'
+            }
+        });
+        assert.equal(meta, ``);
+    });
+
+    it('generate full meta', () => {
+        const meta = MetaGenerator.generate({
+            name: 'firstName lastName',
+            label: 'BackEnd Developer Engineer',
+            email: 'myemail@email.com',
+            phone: '001122334455',
+            birth: '04/04/1900',
+            location: {
+                city: 'myCity',
+                countryCode: 'FR',
+                address: '2 street mystreet',
+                postalCode: '38000',
+                region: 'myrégion'
+            },
+            profiles: [{
+                network: 'network',
+                url: 'url',
+                username: 'username'
+            }]
+        });
+        assert.equal(meta, ``);
+    });
+});

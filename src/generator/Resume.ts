@@ -2,13 +2,13 @@
 import type { ResumeSchema } from '../../../json_cv_schema/src/type/type.js';
 import EducationGenerator from './Education.js';
 import HeaderGenerator from './Header.js';
-import { InterestGenerator } from './interests.js';
-import { LanguagesGenerator } from './languages.js';
-import { MetaGenerator } from './meta.js';
-import { SkillGenerator } from './skills.js';
-import { WorkGenerator } from './work.js';
+import InterestGenerator from './Interests.js';
+import LanguagesGenerator from './Languages.js';
+import MetaGenerator from './Meta.js';
+import SkillGenerator from './Skills.js';
+import WorkGenerator from './Work.js';
 
-export class ResumeGenerator {
+export default class ResumeGenerator {
 
     public static generate(resume: ResumeSchema, css: Buffer, js: Buffer): string {
         return `
@@ -38,7 +38,7 @@ export class ResumeGenerator {
                     ${InterestGenerator.generate(resume.interests, resume.labels)}
                 </aside>
                 <div class="right-column">        
-                    ${WorkGenerator.generate(resume.labels, resume.work)} 
+                    ${WorkGenerator.generate(resume.work, resume.labels)} 
                 </div>
             </body>
         </html>`;

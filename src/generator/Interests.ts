@@ -1,6 +1,6 @@
 import type { Interest, Labels } from '../../../json_cv_schema/src/type/type.js';
 
-export class InterestGenerator {
+export default class InterestGenerator {
 
     public static generate(interests: Interest[], labels: Labels): string {
         if (interests.length == 0) {

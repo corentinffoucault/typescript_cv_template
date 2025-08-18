@@ -1,7 +1,7 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 
-import HeaderGenerator from '../../src/components/Header.js';
+import HeaderGenerator from '../../src/generator/Header.js';
 
 describe('Header', () => {
     it('generate minimal header', () => {
