@@ -37,6 +37,9 @@
     "references": [
         {
             "path": "../json_cv_schema",
-        }
+        },
+        {
+            "path": "./packages/json_cv_schema",
+        },
     ]
 }

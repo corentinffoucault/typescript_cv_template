@@ -1,5 +1,5 @@
 import Link from '../utils/LinkGenerator.js';
-import type { Education, Labels } from '../../../json_cv_schema/src/type/type.js';
+import type { Education, Labels } from '../../packages/json_cv_schema/src/type/type.js';
 
 export default class EducationGenerator {
     public static generate(educations: Education[], labels: Labels): string {

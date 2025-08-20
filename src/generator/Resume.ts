@@ -1,5 +1,5 @@
 
-import type { ResumeSchema } from '../../../json_cv_schema/src/type/type.js';
+import type { ResumeSchema } from '../../packages/json_cv_schema/src/type/type.js';
 import EducationGenerator from './Education.js';
 import HeaderGenerator from './Header.js';
 import InterestGenerator from './Interests.js';

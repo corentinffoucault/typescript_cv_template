@@ -1,6 +1,6 @@
 import Icon from '../utils/IconGenerator.js';
 import Link from '../utils/LinkGenerator.js';
-import type { Basics, Location, Profiles } from '../../../json_cv_schema/src/type/type.js';
+import type { Basics, Location, Profiles } from '../../packages/json_cv_schema/src/type/type.js';
 
 export default class HeaderGenerator {
 
