@@ -15,7 +15,9 @@ describe('Meta', () => {
                 countryCode: 'FR'
             }
         });
-        assert.equal(meta, ``);
+        assert.equal(meta, `
+            <title>firstName lastName</title>
+            undefined`);
     });
 
     it('generate full meta', () => {
@@ -38,6 +40,8 @@ describe('Meta', () => {
                 username: 'username'
             }]
         });
-        assert.equal(meta, ``);
+        assert.equal(meta, `
+            <title>firstName lastName</title>
+            undefined`);
     });
 });

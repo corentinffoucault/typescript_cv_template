@@ -15,6 +15,20 @@ describe('Skills', () => {
             level: 'level',
             name: 'name'
         }]);
-        assert.equal(header, ``);
+        assert.equal(header, `
+            <div class="container skill-container">
+                <section id="skills">
+                
+            <section class="container">
+                <div class="title">
+                    <h3 class="bold">name</h3>
+                    <div class="keyline"></div>
+                </div>
+                <div class="minimal flex-container">
+                    <div class="main-skill skill left">keywords</div>
+                </div>
+            </section>
+                </section>
+            </div>`);
     });
 });

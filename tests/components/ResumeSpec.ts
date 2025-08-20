@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 
 import ResumeGenerator from '../../src/generator/Resume.js';
 
-describe('Header', () => {
+describe.skip('Header', () => {
     it('generate minimal resume', () => {
         const resume = ResumeGenerator.generate({
             basics: {

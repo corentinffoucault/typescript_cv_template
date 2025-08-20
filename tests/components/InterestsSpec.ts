@@ -23,7 +23,10 @@ describe('Interest', () => {
     it('generate full Interests', () => {
         const interests = InterestsGenerator.generate([
             {
-                name: 'interestName'
+                name: 'first interrest'
+            },
+            {
+                name: 'second interrest'
             }
         ], {
             works: 'works',
@@ -37,6 +40,16 @@ describe('Interest', () => {
             language: 'language',
             interests: 'interests'
         });
-        assert.equal(interests, ``);
+        assert.equal(interests, `
+            <div class="container interests-container">
+                <h3 class="bold">interests</h3>
+                
+            <section class="item">
+                <div class="main-skill skill left">first interrest</div>
+            </section> 
+            <section class="item">
+                <div class="main-skill skill left">second interrest</div>
+            </section> 
+            </div>`);
     });
 });
