@@ -1,10 +1,14 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 
+import * as fs from 'fs/promises';
+import * as path from 'path';
+import { fileURLToPath } from 'url';
+
 import ResumeGenerator from '../../src/generator/Resume.js';
 
-describe.skip('Header', () => {
-    it('generate minimal resume', () => {
+describe('Header', async () => {
+    await it('generate minimal resume', async () => {
         const resume = ResumeGenerator.generate({
             basics: {
                 name: 'firstName lastName',
@@ -34,10 +38,14 @@ describe.skip('Header', () => {
                 interests: 'interests'
             }
         }, Buffer.from(''), Buffer.from(''));
-        assert.equal(resume, ``);
+
+        const __filename = fileURLToPath(import.meta.url);
+        const _srcPath = path.dirname(__filename);
+        const expectedResult = await fs.readFile(path.join(_srcPath, "../../../testResources/resumeEmpty.html"));
+        assert.equal(resume, expectedResult.toString());
     });
 
-    it('generate full resume', () => {
+    await it('generate full resume', async () => {
         const resume = ResumeGenerator.generate({
             basics: {
                 name: 'firstName lastName',
@@ -67,6 +75,10 @@ describe.skip('Header', () => {
                 interests: 'interests'
             }
         }, Buffer.from('</style>'), Buffer.from('</script>'));
-        assert.equal(resume, ``);
+
+        const __filename = fileURLToPath(import.meta.url);
+        const _srcPath = path.dirname(__filename);
+        const expectedResult = await fs.readFile(path.join(_srcPath, "../../../testResources/resumeWithoutJsAndCss.html"));
+        assert.equal(resume, expectedResult.toString());
     });
 });

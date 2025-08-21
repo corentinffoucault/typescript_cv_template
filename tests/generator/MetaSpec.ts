@@ -16,8 +16,10 @@ describe('Meta', () => {
             }
         });
         assert.equal(meta, `
-            <title>firstName lastName</title>
-            undefined`);
+                <meta charset="utf-8" />
+                    <title>firstName lastName</title>
+                    
+                <meta name="viewport" content="width=device-width, initial-scale=1" />`);
     });
 
     it('generate full meta', () => {
@@ -41,7 +43,9 @@ describe('Meta', () => {
             }]
         });
         assert.equal(meta, `
-            <title>firstName lastName</title>
-            undefined`);
+                <meta charset="utf-8" />
+                    <title>firstName lastName</title>
+                    
+                <meta name="viewport" content="width=device-width, initial-scale=1" />`);
     });
 });

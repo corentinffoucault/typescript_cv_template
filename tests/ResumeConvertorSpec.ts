@@ -41,9 +41,8 @@ test('ResumeConvertor', async (t) => {
 
         const __filename = fileURLToPath(import.meta.url);
         const _srcPath = path.dirname(__filename);
-        await fs.writeFile(path.join(_srcPath, "../../testResources/resultEmpty.html"), a);
 
-        const result = await fs.readFile(path.join(_srcPath, "../../testResources/resultEmpty.html"));
+        const result = await fs.readFile(path.join(_srcPath, "../../testResources/resumeWithCssAndJsOnly.html"));
         assert.equal(a, result.toString());
     });
 });
