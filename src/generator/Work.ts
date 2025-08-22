@@ -26,7 +26,7 @@ type Item = {
 
 export default class WorkGenerator {
 
-    public static generate(work: Work[], labels: Labels): string {
+    public generate(work: Work[], labels: Labels): string {
         if (work.length == 0) {
             return '';
         }
@@ -42,48 +42,48 @@ export default class WorkGenerator {
         return `<section id="work">
                     <h3>${labels.works}</h3>
                     <div class="stack">
-                        ${nestedWork.map((job: NestedWork) => WorkGenerator.buildTimeLine(labels, job)).join('')}
+                        ${nestedWork.map((job: NestedWork) => this.buildTimeLine(labels, job)).join('')}
                     </div>
                 </section>`;
     }
 
-    private static buildTimeLine(labels: Labels, job: NestedWork): string {
+    private buildTimeLine(labels: Labels, job: NestedWork): string {
         return `<article>
                     <header>
                     <h4>${Link.generate(job.url, job.name)}</h4>
                     <div class="meta">${job.description && `<div>${job.description}</div>`}</div>
                     </header>
                     <div class="timeline">
-                    ${job.items.map((item: Item) => WorkGenerator.generateJob(labels, item)).join('')}
+                    ${job.items.map((item: Item) => this.generateJob(labels, item)).join('')}
                     </div>
                 </article>`;
     }
 
-    private static generateJob(labels: Labels, item: Item): string {
+    private generateJob(labels: Labels, item: Item): string {
         return `<div>
                     <div>
                         <h5>${item.position}</h5>
-                        ${WorkGenerator.generateTeam(labels, item.team)}
-                        ${WorkGenerator.generateWorkMeta(item)}
+                        ${this.generateTeam(labels, item.team)}
+                        ${this.generateWorkMeta(item)}
                     </div>
                     ${Markdown.generate(item.summary)}
                     <div class="workInfo">
-                        ${WorkGenerator.generateHighlights(item.highlights)}
-                        ${WorkGenerator.generateSkill(labels, item)}
+                        ${this.generateHighlights(item.highlights)}
+                        ${this.generateSkill(labels, item)}
                     </div>
                 </div>`;
     }
 
-    private static generateTeam(labels: Labels, team?: Team): string {
+    private generateTeam(labels: Labels, team?: Team): string {
         if (!team) {
             return '';
         }
         return `<div class="workmeta">
-                    <div>${labels.team} ${team.description}: ${WorkGenerator.generateSubTeam('back', team.back)}${WorkGenerator.generateSubTeam('front', team.front, team.back)}${WorkGenerator.generateSubTeam('fullStack', team.fullStack, team.back + team.front)}</div>
+                    <div>${labels.team} ${team.description}: ${this.generateSubTeam('back', team.back)}${this.generateSubTeam('front', team.front, team.back)}${this.generateSubTeam('fullStack', team.fullStack, team.back + team.front)}</div>
                 </div>`;
     }
 
-    private static generateSubTeam(label: string, nbMember: number, previewsNnMember = 0): string {
+    private generateSubTeam(label: string, nbMember: number, previewsNnMember = 0): string {
         if (nbMember == 0) {
             return '';
         }
@@ -91,23 +91,23 @@ export default class WorkGenerator {
         return previewsNnMember == 0 ? team : `, ${team}`;
     }
 
-    private static generateHighlights(highlights: Highlight[] = []): string {
+    private generateHighlights(highlights: Highlight[] = []): string {
         if (highlights.length == 0) {
             return '';
         }
         return `<div class="highlights">
                     <ul>
-                        ${highlights.map(WorkGenerator.generateHighlight).join('')}
+                        ${highlights.map(highlights => this.generateHighlight(highlights)).join('')}
                     </ul>
                 </div>`;
     }
 
-    private static generateHighlight(highlight: Highlight): string {
+    private generateHighlight(highlight: Highlight): string {
         return `<li>${Markdown.generate(highlight.subject)}</li>
-                ${WorkGenerator.generateHighlightDetail(highlight)}`;
+                ${this.generateHighlightDetail(highlight)}`;
     }
 
-    private static generateHighlightDetail({ details = [] }: Highlight): string {
+    private generateHighlightDetail({ details = [] }: Highlight): string {
         if (details.length == 0) {
             return '';
         }
@@ -116,7 +116,7 @@ export default class WorkGenerator {
                 </ul>`;
     }
 
-    private static generateWorkMeta(job: Item): string {
+    private generateWorkMeta(job: Item): string {
         return `<div class="workmeta">
                     <div>
                         ${Duration.print(job.startDate, job.endDate)}
@@ -125,12 +125,12 @@ export default class WorkGenerator {
                 </div>`;
     }
 
-    private static generateSkill(labels: Labels, job: Item): string {
+    private generateSkill(labels: Labels, job: Item): string {
         let skills = `
-            ${WorkGenerator.generateOneSkillType(labels.planguages, job.planguages)}
-            ${WorkGenerator.generateOneSkillType(labels.tools, job.tools)}
-            ${WorkGenerator.generateOneSkillType(labels.environment, job.env)}
-            ${WorkGenerator.generateOneSkillType(labels.methods, job.method)}`;
+            ${this.generateOneSkillType(labels.planguages, job.planguages)}
+            ${this.generateOneSkillType(labels.tools, job.tools)}
+            ${this.generateOneSkillType(labels.environment, job.env)}
+            ${this.generateOneSkillType(labels.methods, job.method)}`;
         if (skills.length == 0) {
             return '';
         }
@@ -139,7 +139,7 @@ export default class WorkGenerator {
                 </div>`;
     }
 
-    private static generateOneSkillType(labels: string, skills: string[] = []): string {
+    private generateOneSkillType(labels: string, skills: string[] = []): string {
         if (skills.length == 0) {
             return '';
         }

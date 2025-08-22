@@ -4,8 +4,9 @@ import assert from 'node:assert/strict';
 import WorkGenerator from '../../src/generator/Work.js';
 
 describe('Work', () => {
+    const workGenerator = new WorkGenerator();
     it('generate minimal work', () => {
-        const header = WorkGenerator.generate([], {
+        const header = workGenerator.generate([], {
             works: 'works',
             planguages: 'planguages',
             team: 'team',
@@ -21,7 +22,7 @@ describe('Work', () => {
     });
 
     it('generate one minimal work', () => {
-        const header = WorkGenerator.generate([{
+        const header = workGenerator.generate([{
             name: 'Company Name',
             description: 'Description of the company',
             position: 'My position in the company',
@@ -132,7 +133,7 @@ describe('Work', () => {
     });
 
     it('generate two work from two company', () => {
-        const header = WorkGenerator.generate([{
+        const header = workGenerator.generate([{
             name: 'First Company Name',
             description: 'Description of the company',
             position: 'My position in the company',
@@ -333,7 +334,7 @@ describe('Work', () => {
     });
 
     it('generate two work from one company', () => {
-        const header = WorkGenerator.generate([{
+        const header = workGenerator.generate([{
             name: 'First Company Name',
             description: 'Description of the company',
             position: 'My position in the company',

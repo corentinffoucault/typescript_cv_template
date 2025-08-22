@@ -1,8 +1,8 @@
-import type { Basics } from '../../../json_cv_schema/src/type/type.js';
+import type { Basics } from '../../packages/json_cv_schema/src/type/type.js';
 import Markdown from '../utils/MarkdownGenerator.js';
 
 export default class MetaGenerator {
-    public static generate(basics: Basics): string {
+    public generate(basics: Basics): string {
         const { name, summary } = basics;
 
         return `
