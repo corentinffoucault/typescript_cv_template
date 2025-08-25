@@ -1,12 +1,12 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 
-import WorkGenerator from '../../src/generator/Work.js';
+import WorksGenerator from '../../src/generator/WorksGenerator.js';
 
-describe('Work', () => {
-    const workGenerator = new WorkGenerator();
+describe('WorkGenerator', () => {
+    const worksGenerator = new WorksGenerator();
     it('generate minimal work', () => {
-        const header = workGenerator.generate([], {
+        const header = worksGenerator.generate([], {
             works: 'works',
             planguages: 'planguages',
             team: 'team',
@@ -22,7 +22,7 @@ describe('Work', () => {
     });
 
     it('generate one minimal work', () => {
-        const header = workGenerator.generate([{
+        const header = worksGenerator.generate([{
             name: 'Company Name',
             description: 'Description of the company',
             position: 'My position in the company',
@@ -133,7 +133,7 @@ describe('Work', () => {
     });
 
     it('generate two work from two company', () => {
-        const header = workGenerator.generate([{
+        const header = worksGenerator.generate([{
             name: 'First Company Name',
             description: 'Description of the company',
             position: 'My position in the company',
@@ -334,7 +334,7 @@ describe('Work', () => {
     });
 
     it('generate two work from one company', () => {
-        const header = workGenerator.generate([{
+        const header = worksGenerator.generate([{
             name: 'First Company Name',
             description: 'Description of the company',
             position: 'My position in the company',

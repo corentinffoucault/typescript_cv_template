@@ -2,16 +2,16 @@ import { describe, it, before } from 'node:test';
 import * as sinon from 'sinon';
 import assert from 'node:assert/strict';
 
-import ResumeGenerator from '../../src/generator/Resume.js';
-import EducationGenerator from '../../src/generator/Education.js';
-import InterestGenerator from '../../src/generator/Interests.js';
-import HeaderGenerator from '../../src/generator/Header.js';
-import LanguageGenerator from '../../src/generator/Languages.js';
-import MetaGenerator from '../../src/generator/Meta.js';
-import SkillGenerator from '../../src/generator/Skills.js';
-import WorkGenerator from '../../src/generator/Work.js';
+import ResumeGenerator from '../../src/generator/ResumeGenerator.js';
+import EducationGenerator from '../../src/generator/EducationGenerator.js';
+import InterestGenerator from '../../src/generator/InterestsGenerator.js';
+import HeaderGenerator from '../../src/generator/HeaderGenerator.js';
+import LanguageGenerator from '../../src/generator/LanguagesGenerator.js';
+import MetaGenerator from '../../src/generator/MetaGenerator.js';
+import SkillsGenerator from '../../src/generator/SkillsGenerator.js';
+import WorksGenerator from '../../src/generator/WorksGenerator.js';
 
-describe('Header', async () => {
+describe('ResumeGenerator', async () => {
 
     let resumeGenerator: ResumeGenerator;
 
@@ -36,23 +36,23 @@ describe('Header', async () => {
             generate: sinon.stub(),
         });
         metaGenerator.generate.returns("generated meta");
-        var skillGenerator = sinon.createStubInstance(SkillGenerator, {
+        var skillsGenerator = sinon.createStubInstance(SkillsGenerator, {
             generate: sinon.stub(),
         });
-        skillGenerator.generate.returns("generated skill");
-        var workGenerator = sinon.createStubInstance(WorkGenerator, {
+        skillsGenerator.generate.returns("generated skill");
+        var worksGenerator = sinon.createStubInstance(WorksGenerator, {
             generate: sinon.stub(),
         });
-        workGenerator.generate.returns("generated work");
+        worksGenerator.generate.returns("generated work");
 
         resumeGenerator = new ResumeGenerator(
             metaGenerator,
             headerGenerator,
             educationGenerator,
             languageGenerator,
-            skillGenerator,
+            skillsGenerator,
             interestGenerator,
-            workGenerator,
+            worksGenerator,
         );
     });
 
