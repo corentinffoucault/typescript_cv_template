@@ -23,12 +23,13 @@ It can be reused across projects, making it easy to keep your resume consistent,
 
 ## Installation
 
-Make sure you have **Node.js** and **npm** installed.  
-Then install the project and dependencies:
+Requirements:
+- **Node.js** v22 or higher
+- **npm** v11 or higher
 
 ```bash
 git clone --recurse-submodules https://github.com/corentinffoucault/typescript_cv_template.git
-cd full-cv-template
+cd typescript_cv_template
 npm install-recursive
 npm run build
 ``` 
