@@ -60,7 +60,7 @@ export default class WorkGenerator {
     }
 
     private generateJob(lang: Intl.LocalesArgument, labels: Labels, item: Item): string {
-        return `<div>
+        return `<div class="job">
                     <div>
                         <h5>${item.position}</h5>
                         ${this.generateTeam(labels, item.team)}
